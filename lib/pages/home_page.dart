@@ -84,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                       padding: const EdgeInsets.all(10),
                       child: Column(
                         children: [
-                          Image.network(
+                          Image.asset(
                             'assets/cement.jpg',
                             height: 150,
                           ),
@@ -166,9 +166,9 @@ class _HomePageState extends State<HomePage> {
                   return Card(
                     child: Column(
                       children: [
-                        Image.network(
+                        Image.asset(
                           'assets/logo.png',
-                          height: 110,
+                          height: 70,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,

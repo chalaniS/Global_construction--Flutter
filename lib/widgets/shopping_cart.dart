@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
-import '../models/Product.dart';
+import '../pages/Payment/checkout_page.dart';
 
 class CartItem {
-  final Product product;
+  final String name;
+  final double price;
   int quantity;
 
-  CartItem(this.product, this.quantity);
+  CartItem(this.name, this.price, this.quantity);
 }
 
 class ShoppingCart extends StatefulWidget {
@@ -15,14 +17,12 @@ class ShoppingCart extends StatefulWidget {
 }
 
 class _ShoppingCartState extends State<ShoppingCart> {
-  List<Product> products = [
-    Product('Product 1', 10.0),
-    Product('Product 2', 15.0),
-    Product('Product 3', 20.0),
+  List<CartItem> cartItems = [
+    CartItem('Product 1', 10.0, 0),
+    CartItem('Product 2', 15.0, 0),
+    CartItem('Product 3', 20.0, 0),
     // Add more products here
   ];
-
-  List<CartItem> cartItems = [];
 
   @override
   Widget build(BuildContext context) {
@@ -31,17 +31,21 @@ class _ShoppingCartState extends State<ShoppingCart> {
         title: Text('Shopping Cart'),
       ),
       body: ListView.builder(
-        itemCount: products.length,
+        itemCount: cartItems.length,
         itemBuilder: (context, index) {
-          final product = products[index];
-          final cartItem = cartItems.firstWhere(
-            (item) => item.product == product,
-            orElse: () => CartItem(product, 0),
-          );
+          final cartItem = cartItems[index];
 
           return ListTile(
-            title: Text(product.name),
-            subtitle: Text('\$${product.price.toStringAsFixed(2)}'),
+            leading: CachedNetworkImage(
+              imageUrl:
+                  'https://example.com/product_${index + 1}.jpg', // Replace with actual image URLs
+              width: 50,
+              height: 50,
+              placeholder: (context, url) => CircularProgressIndicator(),
+              errorWidget: (context, url, error) => Icon(Icons.error),
+            ),
+            title: Text(cartItem.name),
+            subtitle: Text('\$${cartItem.price.toStringAsFixed(2)}'),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
@@ -76,13 +80,21 @@ class _ShoppingCartState extends State<ShoppingCart> {
           style: TextStyle(fontSize: 20),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Navigate to the checkout page when the FAB is pressed
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => CheckoutPage()));
+        },
+        child: Icon(Icons.check),
+      ),
     );
   }
 
   double _calculateTotal() {
     double total = 0.0;
     for (final item in cartItems) {
-      total += item.product.price * item.quantity;
+      total += item.price * item.quantity;
     }
     return total;
   }

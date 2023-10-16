@@ -39,6 +39,7 @@ dependencies:
   ionicons: ^0.2.2
   firebase_database: ^10.2.7
   cloud_firestore: ^4.9.3
+  cached_network_image: ^3.3.0
 
 dev_dependencies:
   flutter_test:
