@@ -1,9 +1,9 @@
-import 'package:construction/pages/home_page.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 
+import '../home_page.dart';
 import 'edit_profile.dart';
 import 'login_page.dart';
 
@@ -147,28 +147,6 @@ class _ProfileState extends State<Profile> {
                       const SizedBox(
                         height: 20,
                       ),
-                      // Card(
-                      //   margin: const EdgeInsets.only(
-                      //       left: 35, right: 35, bottom: 10),
-                      //   color: Colors.white70,
-                      //   shape: RoundedRectangleBorder(
-                      //     borderRadius: BorderRadius.circular(30),
-                      //   ),
-                      //   child: ListTile(
-                      //     leading: Icon(
-                      //       Ionicons.person_outline,
-                      //       color: Colors.black54,
-                      //     ),
-                      //     title: Text(
-                      //       ' ${userData['firstName'] ?? ''} ${userData['lastName'] ?? ''}',
-                      //       style: TextStyle(
-                      //         fontSize: 18,
-                      //         fontWeight: FontWeight.bold,
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
-
                       Card(
                         color: Colors.white70,
                         margin: const EdgeInsets.only(
@@ -214,7 +192,6 @@ class _ProfileState extends State<Profile> {
                           ),
                         ),
                       ),
-
                       Card(
                         color: Colors.white70,
                         margin: const EdgeInsets.only(
@@ -260,7 +237,6 @@ class _ProfileState extends State<Profile> {
                           ),
                         ),
                       ),
-
                       const SizedBox(
                         height: 20,
                       ),
@@ -296,7 +272,6 @@ class _ProfileState extends State<Profile> {
                           ),
                         ),
                       ),
-
                       Card(
                         color: Color.fromARGB(179, 231, 95, 95),
                         margin: const EdgeInsets.only(
@@ -322,7 +297,6 @@ class _ProfileState extends State<Profile> {
                           ),
                         ),
                       ),
-
                       Card(
                         color: const Color.fromARGB(179, 246, 189, 189),
                         margin: const EdgeInsets.only(

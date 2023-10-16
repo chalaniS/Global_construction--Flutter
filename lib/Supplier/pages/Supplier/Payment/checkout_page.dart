@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-import '../../widgets/shopping_cart.dart';
+import '../../../models/CartItems.dart';
 
 class CheckoutPage extends StatelessWidget {
   get cartItems => null;

@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
+import '../models/CartItems.dart';
 import '../pages/Payment/checkout_page.dart';
-
-class CartItem {
-  final String name;
-  final double price;
-  int quantity;
-
-  CartItem(this.name, this.price, this.quantity);
-}
 
 class ShoppingCart extends StatefulWidget {
   @override

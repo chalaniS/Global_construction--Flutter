@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 
+import 'payment_repository.dart';
+
 class PaymentPage extends StatefulWidget {
   @override
   _PaymentPageState createState() => _PaymentPageState();
 }
 
 class _PaymentPageState extends State<PaymentPage> {
+  final PaymentRepository _paymentRepository = PaymentRepository();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,11 +47,6 @@ class _PaymentPageState extends State<PaymentPage> {
   }
 
   void _handlePayment(String paymentMethod) {
-    // Implement payment processing logic here
-    // For a real app, you would integrate with a payment gateway
-    // and handle the payment process accordingly.
-
-    // For this example, we'll just show a confirmation dialog.
     showDialog(
       context: context,
       builder: (context) {
@@ -56,10 +55,22 @@ class _PaymentPageState extends State<PaymentPage> {
           content: Text('Payment with $paymentMethod successful.'),
           actions: <Widget>[
             TextButton(
-              onPressed: () {
-                // Navigate back to the shopping cart or a success page
-                Navigator.of(context).pop();
-                Navigator.of(context).pop(); // Pop this payment page
+              onPressed: () async {
+                // Add payment details to Firestore
+                final result = await _paymentRepository.addPaymentDetails(
+                  'user_id_here',
+                  paymentMethod,
+                  'card_number_here',
+                  'expiration_date_here',
+                );
+                if (result) {
+                  // Navigate back to the shopping cart or a success page
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pop(); // Pop this payment page
+                } else {
+                  // Handle error in adding payment details
+                  // Show an error message or retry payment
+                }
               },
               child: Text('OK'),
             ),

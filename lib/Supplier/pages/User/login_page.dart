@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-import '../../constants.dart';
 import '../home_page.dart' as Home;
 import 'resetPW_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';

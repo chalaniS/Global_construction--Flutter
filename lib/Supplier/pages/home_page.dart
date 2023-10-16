@@ -26,14 +26,18 @@ class _HomePageState extends State<HomePage> {
               Icons.search,
               color: Color(0xFF00008B),
             ),
-            onPressed: () {},
+            onPressed: () {
+              // Handle search action
+            },
           ),
           IconButton(
             icon: const Icon(
               Icons.menu,
               color: Color(0xFF00008B),
             ),
-            onPressed: () {},
+            onPressed: () {
+              // Handle menu action
+            },
           ),
         ],
       ),
@@ -66,7 +70,9 @@ class _HomePageState extends State<HomePage> {
                     width: 100,
                     height: 30,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        // Handle "View All" action
+                      },
                       child: const Text("View All"),
                     ),
                   ),
@@ -112,7 +118,9 @@ class _HomePageState extends State<HomePage> {
                                     width: 60,
                                     height: 20,
                                     child: ElevatedButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        // Handle "View" action
+                                      },
                                       child: const Text(
                                         "View",
                                         style: TextStyle(fontSize: 12),
@@ -148,7 +156,9 @@ class _HomePageState extends State<HomePage> {
                     width: 100,
                     height: 30,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        // Handle "View All" action
+                      },
                       child: const Text("View All"),
                     ),
                   ),
@@ -177,7 +187,7 @@ class _HomePageState extends State<HomePage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Compnay Name",
+                                  "Company Name",
                                   style: TextStyle(fontWeight: FontWeight.w800),
                                 ),
                                 Text(
@@ -193,7 +203,9 @@ class _HomePageState extends State<HomePage> {
                                   width: 60,
                                   height: 20,
                                   child: ElevatedButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      // Handle "View" action
+                                    },
                                     child: const Text(
                                       "View",
                                       style: TextStyle(fontSize: 12),

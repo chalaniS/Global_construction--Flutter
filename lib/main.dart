@@ -1,9 +1,8 @@
-import 'package:construction/pages/home_page.dart';
-import 'package:construction/widgets/shopping_cart.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'Supplier/widgets/shopping_cart.dart';
 import 'firebase_options.dart';
-import 'pages/User/login_page.dart';
+
 import 'theme.dart';
 
 void main() async {
