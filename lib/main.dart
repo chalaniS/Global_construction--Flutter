@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'Supplier/pages/home_page.dart';
 import 'Supplier/widgets/shopping_cart.dart';
 import 'firebase_options.dart';
 
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
       title: 'WonderSL',
       debugShowCheckedModeBanner: false,
       theme: lightTheme(context),
-      home: ShoppingCart(),
+      home: HomePage(),
     );
   }
 }

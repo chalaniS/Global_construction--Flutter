@@ -1,4 +1,6 @@
+import 'package:construction/Admin/SiteManagement/dashboard.dart';
 import 'package:construction/Supplier/pages/User/login_page.dart';
+import 'package:construction/Supplier/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 class UserTypeSelection extends StatefulWidget {
@@ -31,8 +33,12 @@ class _UserTypeSelectionState extends State<UserTypeSelection> {
                   selectedUserType = "Supplier";
                 });
 
-                // Navigate to the login page with the selected user type
-                navigateToLoginPage();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HomePage(),
+                  ),
+                );
               },
               child: Text('Supplier'),
             ),
@@ -43,9 +49,12 @@ class _UserTypeSelectionState extends State<UserTypeSelection> {
                 setState(() {
                   selectedUserType = "Admin";
                 });
-
-                // Navigate to the login page with the selected user type
-                navigateToLoginPage();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DashBoard(),
+                  ),
+                );
               },
               child: Text('Admin'),
             ),
@@ -55,15 +64,15 @@ class _UserTypeSelectionState extends State<UserTypeSelection> {
     );
   }
 
-  void navigateToLoginPage() {
-    if (selectedUserType != null) {
-      // Use Navigator to push the login page with the selected user type
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => MyLogin(),
-        ),
-      );
-    }
-  }
+  // void navigateToLoginPage() {
+  //   if (selectedUserType != null) {
+  //     // Use Navigator to push the login page with the selected user type
+  //     Navigator.push(
+  //       context,
+  //       MaterialPageRoute(
+  //         builder: (context) => MyLogin(),
+  //       ),
+  //     );
+  //   }
+  // }
 }
