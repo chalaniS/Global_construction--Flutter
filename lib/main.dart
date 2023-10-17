@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'Supplier/pages/home_page.dart';
-import 'Supplier/widgets/shopping_cart.dart';
 import 'firebase_options.dart';
 
 import 'theme.dart';
