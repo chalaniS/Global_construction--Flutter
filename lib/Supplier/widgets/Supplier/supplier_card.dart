@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../pages/Supplier/supplier_list.dart';
+import '../../models/Supplier.dart';
 
 class SupplierCard extends StatelessWidget {
   final Supplier supplier;

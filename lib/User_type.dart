@@ -63,16 +63,4 @@ class _UserTypeSelectionState extends State<UserTypeSelection> {
       ),
     );
   }
-
-  // void navigateToLoginPage() {
-  //   if (selectedUserType != null) {
-  //     // Use Navigator to push the login page with the selected user type
-  //     Navigator.push(
-  //       context,
-  //       MaterialPageRoute(
-  //         builder: (context) => MyLogin(),
-  //       ),
-  //     );
-  //   }
-  // }
 }

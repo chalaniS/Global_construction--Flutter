@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Supplier {
-  final String name;
-  final String location;
-  final String imageUrl;
-  bool isFavorite;
-
-  Supplier(this.name, this.location, this.imageUrl, {this.isFavorite = false});
-}
+import '../../models/Supplier.dart';
 
 class SupplierListPage extends StatefulWidget {
   const SupplierListPage({Key? key}) : super(key: key);
@@ -27,6 +20,7 @@ class _SupplierListPageState extends State<SupplierListPage> {
         'assets/images/supplier03.png'),
     Supplier("Alpha Suppliers", "Panadura, Sri Lanka",
         'assets/images/supplier04.png'),
+
     // Add more suppliers as needed
   ];
 
@@ -84,25 +78,35 @@ class _SupplierListPageState extends State<SupplierListPage> {
                   child: Column(
                     children: [
                       const SizedBox(
-                          height: 16), // Add spacing between each image
+                        height: 6,
+                      ), // Add spacing between each image
                       Container(
+                        margin: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           borderRadius:
-                              BorderRadius.circular(16), // Add curved edge
+                              BorderRadius.circular(36), // Add curved edge
                         ),
                         child: Stack(
                           alignment: Alignment.center,
                           children: [
                             AspectRatio(
                               aspectRatio: 16 / 4, // Set a fixed aspect ratio
-                              child: Image.asset(
-                                suppliers[index].imageUrl,
-                                fit: BoxFit.cover,
+                              child: ColorFiltered(
+                                colorFilter: ColorFilter.mode(
+                                  Colors.black.withOpacity(
+                                      0.6), // Adjust the opacity as needed
+                                  BlendMode
+                                      .darken, // You can change the blend mode as needed
+                                ),
+                                child: Image.asset(
+                                  suppliers[index].imageUrl,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                             Positioned(
-                              bottom: 0,
-                              left: 0,
+                              bottom: 14,
+                              left: 15,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [

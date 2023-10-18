@@ -22,9 +22,9 @@ class SupermaterialPage extends StatelessWidget {
 
 class RecentOrdersPage extends StatelessWidget {
   final List<Order> orders = [
-    Order("Cement 50kg", 'assets/images/order1.png', 100.0),
+    Order("Cement 50kg", 'assets/images/brick.jpg', 100.0),
     // Order("Order 2", 'assets/images/order2.png', 150.0),
-    Order("Brick", 'assets/images/brick.png', 80.0),
+    Order("Brick", 'assets/images/brick.jpg', 80.0),
     // Add more orders as needed
   ];
 
@@ -40,7 +40,7 @@ class RecentOrdersPage extends StatelessWidget {
           },
           iconSize: 24,
         ),
-        title: Text(
+        title: const Text(
           'DEF Suppliers',
           style: TextStyle(color: Color.fromARGB(255, 1, 20, 129)),
         ),
