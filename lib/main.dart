@@ -1,6 +1,9 @@
+import 'package:construction/Admin/RequisitionManagement/Pages/approve_requisitions.dart';
+import 'package:construction/Admin/RequisitionManagement/Pages/pending_requisitions.dart';
+import 'package:construction/Admin/RequisitionManagement/Pages/rejected_requisitions.dart';
+import 'package:construction/Admin/RequisitionManagement/Pages/requisition_home.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'Supplier/widgets/shopping_cart.dart';
 import 'firebase_options.dart';
 
 import 'theme.dart';
@@ -28,7 +31,7 @@ class MyApp extends StatelessWidget {
       title: 'WonderSL',
       debugShowCheckedModeBanner: false,
       theme: lightTheme(context),
-      home: ShoppingCart(),
+      home: const RejectedRequisitions(),
     );
   }
 }
