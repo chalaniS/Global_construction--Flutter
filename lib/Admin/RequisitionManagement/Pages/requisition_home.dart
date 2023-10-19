@@ -1,3 +1,5 @@
+import 'package:construction/Admin/RequisitionManagement/Pages/pending_requisitions.dart';
+import 'package:construction/Admin/RequisitionManagement/Pages/rejected_requisitions.dart';
 import 'package:construction/Admin/RequisitionManagement/components/side_menu.dart';
 import 'package:flutter/material.dart';
 
@@ -73,18 +75,29 @@ class _RequisitionsHomeState extends State<RequisitionsHome> {
                       // pending requisitions
                       Column(
                         children: [
-                          Container(
-                            width: 250,
-                            height: 250,
-                            padding: const EdgeInsets.all(20),
-                            decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 104, 135, 165),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: const Icon(
-                              Icons.av_timer_outlined,
-                              size: 180.0,
-                              color: Colors.black87,
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const PendingRequisitions(),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              width: 250,
+                              height: 250,
+                              padding: const EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 104, 135, 165),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: const Icon(
+                                Icons.av_timer_outlined,
+                                size: 180.0,
+                                color: Colors.black87,
+                              ),
                             ),
                           ),
                           const SizedBox(height: 10),
@@ -129,18 +142,29 @@ class _RequisitionsHomeState extends State<RequisitionsHome> {
                       // rejected requisitions
                       Column(
                         children: [
-                          Container(
-                            width: 250,
-                            height: 250,
-                            padding: const EdgeInsets.all(20),
-                            decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 104, 135, 165),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: const Icon(
-                              Icons.cancel,
-                              size: 180.0,
-                              color: Colors.black87,
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const RejectedRequisitions(),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              width: 250,
+                              height: 250,
+                              padding: const EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 104, 135, 165),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: const Icon(
+                                Icons.cancel,
+                                size: 180.0,
+                                color: Colors.black87,
+                              ),
                             ),
                           ),
                           const SizedBox(height: 10),
