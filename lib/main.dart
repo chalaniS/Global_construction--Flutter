@@ -1,8 +1,4 @@
 import 'package:construction/SiteManager/pages/cart_page.dart';
-import 'package:construction/SiteManager/pages/checkout_page.dart';
-import 'package:construction/SiteManager/pages/order_detail_page.dart';
-import 'package:construction/SiteManager/pages/orders_main_page.dart';
-import 'package:construction/SiteManager/pages/update_order_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -35,7 +31,7 @@ class MyApp extends StatelessWidget {
       theme: lightTheme(context),
       // home: CartPage(),
       // home: OrderDetailPage(),
-      home: CheckoutPage(),
+      home: CartPage(),
     );
   }
 }

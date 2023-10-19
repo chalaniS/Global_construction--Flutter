@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 import '../components/cart_item.dart';
@@ -10,6 +11,41 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
+  Map<String, dynamic> oneproduct = new Map<String, dynamic>();
+  List<Map<dynamic, dynamic>> productsData = [];
+  final DatabaseReference productReference =
+      FirebaseDatabase.instance.reference().child('products');
+
+  @override
+  void initState() {
+    super.initState();
+    _loadProducts();
+  }
+
+  Future<void> _loadProducts() async {
+    try {
+      productReference.onValue.listen((DatabaseEvent event) {
+        if (event.snapshot.value != null) {
+          final data = event.snapshot.value;
+          if (data is Map) {
+            final List<Map<dynamic, dynamic>> products = [];
+            data.forEach((key, value) {
+              final product = Map<dynamic, dynamic>.from(value);
+              products.add(product);
+              print(product);
+            });
+
+            setState(() {
+              productsData = products;
+            });
+          }
+        }
+      });
+    } catch (error) {
+      print('Error loading data: $error');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,91 +131,66 @@ class _CartPageState extends State<CartPage> {
             ),
 
             // product details container
-            Container(
-              padding: const EdgeInsets.all(10),
-              decoration: const BoxDecoration(
-                color: Color(0xFFEFF7FF),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
-                ),
-              ),
-              child: Column(
-                children: [
-                  CartItem(),
+            ListView.builder(
+              itemCount: productsData.length,
+              itemBuilder: (BuildContext context, int index) {
+                final product = productsData[index];
 
-                  // space between two cart items
-                  SizedBox(height: 10),
-                  Divider(
-                    color: Colors.black,
-                    height: 1,
-                    thickness: 1,
-                  ),
-                  SizedBox(height: 10),
-                  CartItem(),
-
-                  // space between two cart items
-                  SizedBox(height: 10),
-                  Divider(
-                    color: Colors.black,
-                    height: 1,
-                    thickness: 1,
-                  ),
-                  SizedBox(height: 10),
-                  CartItem(),
-
-                  // end of cart items
-                  Divider(
-                    color: Colors.black,
-                    height: 1,
-                    thickness: 1,
-                  ),
-                  SizedBox(height: 20),
-
-                  //subtotal section
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Subtotal",
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        "Rs. 19800.00",
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w200,
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  SizedBox(height: 40),
-
-                  // checkout button
-                  GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      padding: EdgeInsets.all(10),
-                      width: double.infinity,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: Color(0xFF00008B),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      alignment: Alignment.center,
-                      child: const Text(
-                        'Go to Checkout',
-                        style: TextStyle(color: Colors.white),
-                      ),
+                return Column(
+                  children: [
+                    CartItem(productsData: product), // Pass the product data
+                    SizedBox(height: 10),
+                    Divider(
+                      color: Colors.black,
+                      height: 1,
+                      thickness: 1,
                     ),
+                  ],
+                );
+              },
+            ),
+
+            //subtotal section
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Subtotal",
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
                   ),
-                ],
+                ),
+                Text(
+                  "Rs. 19800.00",
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w200,
+                  ),
+                ),
+              ],
+            ),
+
+            SizedBox(height: 40),
+
+            // checkout button
+            GestureDetector(
+              onTap: () {},
+              child: Container(
+                padding: EdgeInsets.all(10),
+                width: double.infinity,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: Color(0xFF00008B),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                alignment: Alignment.center,
+                child: const Text(
+                  'Go to Checkout',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],

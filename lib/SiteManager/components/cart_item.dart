@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-
 import 'cart_add_remove_button.dart';
 
 class CartItem extends StatefulWidget {
-  const CartItem({super.key});
+  final Map<dynamic, dynamic> productsData;
+
+  CartItem({Key? key, required this.productsData}) : super(key: key);
 
   @override
   State<CartItem> createState() => _CartItemState();
@@ -12,10 +13,12 @@ class CartItem extends StatefulWidget {
 class _CartItemState extends State<CartItem> {
   @override
   Widget build(BuildContext context) {
+    final productData = widget.productsData; // Retrieve productData from widget
+
     return Container(
       padding: const EdgeInsets.all(10),
       color: Colors.transparent,
-      child: const Column(
+      child: Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -24,14 +27,14 @@ class _CartItemState extends State<CartItem> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Wood",
+                    productData['supplierName'],
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
-                    "White Oak",
+                    productData['name'], // Use productData
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
@@ -40,7 +43,8 @@ class _CartItemState extends State<CartItem> {
                 ],
               ),
               Image(
-                image: AssetImage('assets/cement.jpg'),
+                image: AssetImage(
+                    'assets/cement.jpg'), // You can also use productData for the image path
                 height: 60,
               ),
             ],
@@ -51,7 +55,7 @@ class _CartItemState extends State<CartItem> {
             children: [
               CartAddRemoveButton(),
               Text(
-                "Rs. 19800.00",
+                "Rs. ${productData['price']}", // Use productData
                 style: TextStyle(fontSize: 14),
               )
             ],
