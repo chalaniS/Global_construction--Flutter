@@ -1,9 +1,11 @@
+import 'package:construction/SiteManager/pages/cart_page.dart';
+import 'package:construction/SiteManager/pages/checkout_page.dart';
+import 'package:construction/SiteManager/pages/order_detail_page.dart';
+import 'package:construction/SiteManager/pages/orders_main_page.dart';
+import 'package:construction/SiteManager/pages/update_order_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'Supplier/pages/Supplier/add_supplier.dart';
-import 'Supplier/pages/Supplier/supplier_list.dart';
-import 'Supplier/pages/Supplier/supplier_material_page.dart';
-import 'Supplier/pages/home_page.dart';
+
 import 'firebase_options.dart';
 
 import 'theme.dart';
@@ -31,7 +33,9 @@ class MyApp extends StatelessWidget {
       title: 'WonderSL',
       debugShowCheckedModeBanner: false,
       theme: lightTheme(context),
-      home: AddSupplierPage(),
+      // home: CartPage(),
+      // home: OrderDetailPage(),
+      home: CheckoutPage(),
     );
   }
 }
