@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:construction/Admin/RequisitionManagement/Pages/approve_requisitions.dart';
+import 'package:construction/Admin/RequisitionManagement/Pages/approve_reject_requisitions.dart';
 import 'package:construction/Admin/RequisitionManagement/components/side_menu.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class PendingRequisitions extends StatefulWidget {
@@ -12,9 +11,6 @@ class PendingRequisitions extends StatefulWidget {
 }
 
 class _PendingRequisitionsState extends State<PendingRequisitions> {
-  // instance of auth
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

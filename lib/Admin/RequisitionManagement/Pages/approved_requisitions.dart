@@ -2,14 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:construction/Admin/RequisitionManagement/components/side_menu.dart';
 import 'package:flutter/material.dart';
 
-class RejectedRequisitions extends StatefulWidget {
-  const RejectedRequisitions({super.key});
+class ApprovedRequisitions extends StatefulWidget {
+  const ApprovedRequisitions({super.key});
 
   @override
-  State<RejectedRequisitions> createState() => _RejectedRequisitionsState();
+  State<ApprovedRequisitions> createState() => _ApprovedRequisitionsState();
 }
 
-class _RejectedRequisitionsState extends State<RejectedRequisitions> {
+class _ApprovedRequisitionsState extends State<ApprovedRequisitions> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +25,7 @@ class _RejectedRequisitionsState extends State<RejectedRequisitions> {
                   fontSize: 20,
                   fontWeight: FontWeight.w600),
             ),
-            const Text('Rejected Requisitions'),
+            const Text('Approved Requisitions'),
             Row(
               children: [
                 Container(
@@ -63,7 +63,7 @@ class _RejectedRequisitionsState extends State<RejectedRequisitions> {
             width: MediaQuery.of(context).size.width * 0.80,
             // padding: const EdgeInsets.all(20),
             color: const Color.fromARGB(255, 220, 221, 223),
-            child: _buildRejectedRequisitions(),
+            child: _buildApprovedRequisitions(),
           ),
         ],
       ),
@@ -71,11 +71,11 @@ class _RejectedRequisitionsState extends State<RejectedRequisitions> {
   }
 }
 
-// build list of rejected requisitions
-Widget _buildRejectedRequisitions() {
+// build list of requisitions
+Widget _buildApprovedRequisitions() {
   return StreamBuilder<QuerySnapshot>(
     stream: FirebaseFirestore.instance
-        .collection('rejectedRequisitions')
+        .collection('approvedRequisitions')
         .snapshots(),
     builder: (context, snapshot) {
       if (!snapshot.hasData) {
@@ -114,7 +114,7 @@ Widget _buildRejectedRequisitions() {
   );
 }
 
-// build a single rejected requisition item
+// build a single requisition item
 Widget _buildRejectedRequisitionItem(DocumentSnapshot document) {
   Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
 
@@ -122,7 +122,7 @@ Widget _buildRejectedRequisitionItem(DocumentSnapshot document) {
     padding: const EdgeInsets.only(top: 20, bottom: 20, left: 40),
     margin: const EdgeInsets.only(top: 20, bottom: 20, left: 20, right: 20),
     decoration: BoxDecoration(
-      color: Color.fromARGB(255, 74, 123, 138),
+      color: Color.fromARGB(255, 115, 160, 173),
       borderRadius: BorderRadius.circular(20),
     ),
     child: Column(
@@ -145,24 +145,21 @@ Widget _buildRejectedRequisitionItem(DocumentSnapshot document) {
         ),
         SizedBox(height: 5),
         RichText(
-          text: TextSpan(
+          text: const TextSpan(
             children: [
               TextSpan(
                 text: "Status: ",
                 style: TextStyle(color: Colors.black, fontSize: 16),
               ),
               TextSpan(
-                text: "Rejected",
+                text: "Approved",
                 style: TextStyle(
-                    color: Color.fromARGB(255, 185, 20, 9), fontSize: 16),
+                    color: Color.fromARGB(255, 19, 97, 21),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
               ),
             ],
           ),
-        ),
-        SizedBox(height: 5),
-        Text(
-          "Reason: ${data['remark']}",
-          style: TextStyle(color: Colors.black, fontSize: 16),
         ),
       ],
     ),

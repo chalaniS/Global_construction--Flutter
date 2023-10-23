@@ -1,4 +1,4 @@
-import 'package:construction/Admin/RequisitionManagement/Pages/approve_requisitions.dart';
+import 'package:construction/Admin/RequisitionManagement/Pages/approve_reject_requisitions.dart';
 import 'package:construction/Admin/RequisitionManagement/Pages/pending_requisitions.dart';
 import 'package:construction/Admin/RequisitionManagement/Pages/rejected_requisitions.dart';
 import 'package:construction/Admin/RequisitionManagement/Pages/requisition_home.dart';

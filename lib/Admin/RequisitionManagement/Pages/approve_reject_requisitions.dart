@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:construction/Admin/RequisitionManagement/Pages/approved_requisitions.dart';
+import 'package:construction/Admin/RequisitionManagement/Pages/rejected_requisitions.dart';
 import 'package:construction/Admin/RequisitionManagement/components/side_menu.dart';
 import 'package:flutter/material.dart';
 
@@ -28,6 +31,166 @@ class RequisitionsApprovalPage extends StatefulWidget {
 }
 
 class _RequisitionsApprovalPageState extends State<RequisitionsApprovalPage> {
+  // Define a TextEditingController for the remark field
+  final TextEditingController remarkController = TextEditingController();
+
+  // Method to save rejected requisition to rejectedRequisitions collection and delete from pendingRequisitions collection
+  void saveRejectedRequisition() async {
+    try {
+      // Retrieve the remark from the TextEditingController
+      String remark = remarkController.text;
+
+      if (remark.isEmpty) {
+        // Show an error message if the remark is empty
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Error'),
+            content: const Text('Please enter a remark before rejecting.'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+        );
+        return; // Exit the function
+      }
+
+      // Save the rejected requisition to the 'rejectedRequisitions' collection
+      await FirebaseFirestore.instance.collection('rejectedRequisitions').add({
+        'refNo': widget.refNo,
+        'siteManager': widget.siteManager,
+        'requisitionDate': widget.requisitionDate,
+        'requisitionStatus': 'Rejected', // Set the status to 'Rejected'
+        'remark': remark, // Add the remark to the document
+      });
+
+      // Delete the rejected requisition from the 'pendingRequisitions' collection
+      await FirebaseFirestore.instance
+          .collection('pendingRequisitions')
+          .doc(widget
+              .requisitionId) // Assuming 'requisitionId' uniquely identifies the requisition
+          .delete();
+
+      // Show a success alert message
+      // ignore: use_build_context_synchronously
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Success'),
+          content: const Text('Requisition rejected successfully'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                // Navigate to the pending requisitions page
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const RejectedRequisitions(),
+                  ),
+                );
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    } catch (error) {
+      print('Error saving or deleting requisition: $error');
+
+      // Show an error alert message
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Error'),
+          content: Text('An error occurred: $error'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    remarkController.dispose();
+    super.dispose();
+  }
+
+  // Method to save approved requisition to approvedRequisitions collection
+  void saveApprovedRequisition() async {
+    try {
+      // Save the approved requisition to the 'approvedRequisitions' collection
+      await FirebaseFirestore.instance.collection('approvedRequisitions').add({
+        'refNo': widget.refNo,
+        'siteManager': widget.siteManager,
+        'requisitionDate': widget.requisitionDate,
+        'requisitionStatus': 'Approved', // Set the status to 'Approved'
+        // Add other fields as needed
+      });
+
+      // Delete the approved requisition from the 'pendingRequisitions' collection
+      await FirebaseFirestore.instance
+          .collection('pendingRequisitions')
+          .doc(widget
+              .requisitionId) // Assuming 'requisitionId' uniquely identifies the requisition
+          .delete();
+
+      // Show a success alert message
+      // ignore: use_build_context_synchronously
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Success'),
+          content: const Text('Requisition approved successfully'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                // Navigate to the pending requisitions page
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ApprovedRequisitions(),
+                  ),
+                );
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    } catch (error) {
+      print('Error saving or deleting requisition: $error');
+
+      // Show an error alert message
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Error'),
+          content: Text('An error occurred: $error'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -348,6 +511,7 @@ class _RequisitionsApprovalPageState extends State<RequisitionsApprovalPage> {
                         Expanded(
                           flex: 1,
                           child: TextFormField(
+                            controller: remarkController,
                             decoration: const InputDecoration(
                               border: OutlineInputBorder(),
                               hintText: 'Enter your remark',
@@ -380,7 +544,9 @@ class _RequisitionsApprovalPageState extends State<RequisitionsApprovalPage> {
                                 ),
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              saveApprovedRequisition();
+                            },
                             child: const Text(
                               'Approve',
                               style:
@@ -404,7 +570,7 @@ class _RequisitionsApprovalPageState extends State<RequisitionsApprovalPage> {
                                 ),
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: saveRejectedRequisition,
                             child: const Text(
                               'Reject',
                               style: TextStyle(fontSize: 16),

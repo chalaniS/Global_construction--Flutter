@@ -1,3 +1,4 @@
+import 'package:construction/Admin/RequisitionManagement/Pages/approved_requisitions.dart';
 import 'package:construction/Admin/RequisitionManagement/Pages/pending_requisitions.dart';
 import 'package:construction/Admin/RequisitionManagement/Pages/rejected_requisitions.dart';
 import 'package:construction/Admin/RequisitionManagement/components/side_menu.dart';
@@ -114,18 +115,29 @@ class _RequisitionsHomeState extends State<RequisitionsHome> {
                       // approved requisitions
                       Column(
                         children: [
-                          Container(
-                            width: 250,
-                            height: 250,
-                            padding: const EdgeInsets.all(20),
-                            decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 104, 135, 165),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: const Icon(
-                              Icons.check_circle,
-                              size: 180.0,
-                              color: Colors.black87,
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ApprovedRequisitions(),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              width: 250,
+                              height: 250,
+                              padding: const EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 104, 135, 165),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: const Icon(
+                                Icons.check_circle,
+                                size: 180.0,
+                                color: Colors.black87,
+                              ),
                             ),
                           ),
                           const SizedBox(height: 10),
