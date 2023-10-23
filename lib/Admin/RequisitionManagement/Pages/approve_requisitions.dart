@@ -2,7 +2,25 @@ import 'package:construction/Admin/RequisitionManagement/components/side_menu.da
 import 'package:flutter/material.dart';
 
 class RequisitionsApprovalPage extends StatefulWidget {
-  const RequisitionsApprovalPage({super.key});
+  final String requisitionId;
+  final String refNo;
+  final String siteManager;
+  final String requisitionDate;
+  final String requisitionBudget;
+  final String requisitionStatus;
+  final String supplier;
+  final String site;
+  const RequisitionsApprovalPage({
+    super.key,
+    required this.requisitionId,
+    required this.refNo,
+    required this.siteManager,
+    required this.requisitionDate,
+    required this.requisitionBudget,
+    required this.requisitionStatus,
+    required this.supplier,
+    required this.site,
+  });
 
   @override
   State<RequisitionsApprovalPage> createState() =>
@@ -66,58 +84,124 @@ class _RequisitionsApprovalPageState extends State<RequisitionsApprovalPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Container with 5 texts
-                  Container(
-                    padding: const EdgeInsets.all(16.0),
-                    child: const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Ref Number : 123456",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
+                  // Container with requisition details
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Column(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(16.0),
+                            child: const Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Ref Number : ",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(height: 10),
+                                Text(
+                                  "Site Manager : ",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(height: 10),
+                                Text(
+                                  "Site : ",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(height: 10),
+                                Text(
+                                  "Date : ",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(height: 10),
+                                Text(
+                                  "Supplier : ",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                          "Site Manager : John Doe",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
+                        ],
+                      ),
+                      const SizedBox(width: 10),
+                      Column(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  widget.refNo,
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                Text(
+                                  widget.siteManager,
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                Text(
+                                  widget.site,
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                Text(
+                                  widget.requisitionDate,
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                Text(
+                                  widget.supplier,
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                          "Site : Kaduwela",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                          "Date : 2021-09-20",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                          "Supplier : DEF Private Ltd",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
+                        ],
+                      ),
+                    ],
                   ),
 
                   const SizedBox(height: 10),
@@ -162,8 +246,8 @@ class _RequisitionsApprovalPageState extends State<RequisitionsApprovalPage> {
                                   fontWeight: FontWeight.bold)),
                         ),
                       ],
-                      rows: const [
-                        DataRow(cells: [
+                      rows: [
+                        const DataRow(cells: [
                           DataCell(Text(
                             'Sand',
                             style: TextStyle(fontSize: 16),
@@ -181,7 +265,7 @@ class _RequisitionsApprovalPageState extends State<RequisitionsApprovalPage> {
                             style: TextStyle(fontSize: 16),
                           )),
                         ]),
-                        DataRow(cells: [
+                        const DataRow(cells: [
                           DataCell(Text(
                             'Tiles',
                             style: TextStyle(fontSize: 16),
@@ -199,7 +283,7 @@ class _RequisitionsApprovalPageState extends State<RequisitionsApprovalPage> {
                             style: TextStyle(fontSize: 16),
                           )),
                         ]),
-                        DataRow(cells: [
+                        const DataRow(cells: [
                           DataCell(Text(
                             '20kg cement',
                             style: TextStyle(fontSize: 16),
@@ -218,15 +302,15 @@ class _RequisitionsApprovalPageState extends State<RequisitionsApprovalPage> {
                           )),
                         ]),
                         DataRow(cells: [
-                          DataCell(Text('')),
-                          DataCell(Text('')),
-                          DataCell(Text(
-                            'Total AMount',
+                          const DataCell(Text('')),
+                          const DataCell(Text('')),
+                          const DataCell(Text(
+                            'Total Amount',
                             style: TextStyle(fontSize: 16),
                           )),
                           DataCell(Text(
-                            'Rs. 250000',
-                            style: TextStyle(fontSize: 16),
+                            widget.requisitionBudget,
+                            style: const TextStyle(fontSize: 16),
                           )),
                         ]),
                       ],
@@ -236,9 +320,9 @@ class _RequisitionsApprovalPageState extends State<RequisitionsApprovalPage> {
                   const SizedBox(height: 30),
 
                   // status text
-                  const Text(
-                    'Current Status: Pending',
-                    style: TextStyle(
+                  Text(
+                    'Current Status: ${widget.requisitionStatus}',
+                    style: const TextStyle(
                       fontSize: 16,
                       color: Colors.black87,
                       fontWeight: FontWeight.bold,
@@ -282,6 +366,7 @@ class _RequisitionsApprovalPageState extends State<RequisitionsApprovalPage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
+                        // approve button
                         SizedBox(
                           width: 100,
                           child: ElevatedButton(
@@ -304,6 +389,8 @@ class _RequisitionsApprovalPageState extends State<RequisitionsApprovalPage> {
                           ),
                         ),
                         const SizedBox(width: 20),
+
+                        // reject button
                         SizedBox(
                           width: 100,
                           child: ElevatedButton(
@@ -336,149 +423,3 @@ class _RequisitionsApprovalPageState extends State<RequisitionsApprovalPage> {
     );
   }
 }
-
-
-// class RequisitionsApprovalPage extends StatefulWidget {
-//   const RequisitionsApprovalPage({super.key});
-
-//   @override
-//   State<RequisitionsApprovalPage> createState() =>
-//       _RequisitionsApprovalPageState();
-// }
-
-// class _RequisitionsApprovalPageState extends State<RequisitionsApprovalPage> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         backgroundColor: const Color(0xFF00008B),
-//         title: Row(
-//           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//           children: [
-//             const Text(
-//               'Global Constructions',
-//               style: TextStyle(
-//                   color: Colors.white,
-//                   fontSize: 20,
-//                   fontWeight: FontWeight.w600),
-//             ),
-//             const Text('Pending Requisitions'),
-//             Row(
-//               children: [
-//                 Container(
-//                   padding: const EdgeInsets.all(7),
-//                   decoration: BoxDecoration(
-//                     color: Colors.white,
-//                     borderRadius: BorderRadius.circular(5),
-//                   ),
-//                   child: const Row(
-//                     children: [
-//                       Icon(
-//                         Icons.person_rounded,
-//                         color: Colors.black,
-//                       ),
-//                       SizedBox(width: 5),
-//                       Text(
-//                         'User name',
-//                         style: TextStyle(color: Colors.black, fontSize: 14),
-//                       )
-//                     ],
-//                   ),
-//                 ),
-//               ],
-//             )
-//           ],
-//         ),
-//       ),
-//       body: Row(
-//         children: [
-//           // Side menu
-//           const SideMenuBar(),
-
-//           // Content area
-//           Container(
-//               width: MediaQuery.of(context).size.width * 0.80,
-//               color: const Color.fromARGB(255, 220, 221, 223),
-//               child: Center(
-//                 child: Column(
-//                   children: [
-//                     // Container with 5 texts
-//                     Container(
-//                       padding: const EdgeInsets.all(16.0),
-//                       child: Column(
-//                         children: [
-//                           Text('Text 1'),
-//                           Text('Text 2'),
-//                           Text('Text 3'),
-//                           Text('Text 4'),
-//                           Text('Text 5'),
-//                         ],
-//                       ),
-//                     ),
-//                     SizedBox(height: 20),
-//                     // Table with 5 rows and 4 columns
-//                     DataTable(
-//                       columns: [
-//                         DataColumn(label: Text('Column 1')),
-//                         DataColumn(label: Text('Column 2')),
-//                         DataColumn(label: Text('Column 3')),
-//                         DataColumn(label: Text('Column 4')),
-//                       ],
-//                       rows: [
-//                         DataRow(cells: [
-//                           DataCell(Text('Row 1, Col 1')),
-//                           DataCell(Text('Row 1, Col 2')),
-//                           DataCell(Text('Row 1, Col 3')),
-//                           DataCell(Text('Row 1, Col 4')),
-//                         ]),
-//                         DataRow(cells: [
-//                           DataCell(Text('Row 2, Col 1')),
-//                           DataCell(Text('Row 2, Col 2')),
-//                           DataCell(Text('Row 2, Col 3')),
-//                           DataCell(Text('Row 2, Col 4')),
-//                         ]),
-//                         // Add more rows as needed
-//                       ],
-//                     ),
-//                     SizedBox(height: 20),
-//                     // Text widget
-//                     Text('Additional Text'),
-//                     SizedBox(height: 20),
-//                     // Text with input field
-//                     Row(
-//                       children: [
-//                         Text('Text with Input: '),
-//                         Expanded(
-//                           child: TextFormField(
-//                               // Add your input field properties here
-//                               ),
-//                         ),
-//                       ],
-//                     ),
-//                     SizedBox(height: 20),
-//                     // Two buttons
-//                     Row(
-//                       mainAxisAlignment: MainAxisAlignment.spaceAround,
-//                       children: [
-//                         ElevatedButton(
-//                           onPressed: () {
-//                             // Add your button 1 action
-//                           },
-//                           child: Text('Button 1'),
-//                         ),
-//                         ElevatedButton(
-//                           onPressed: () {
-//                             // Add your button 2 action
-//                           },
-//                           child: Text('Button 2'),
-//                         ),
-//                       ],
-//                     ),
-//                   ],
-//                 ),
-//               )),
-//         ],
-//       ),
-//     );
-//   }
-// }
