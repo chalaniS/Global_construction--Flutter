@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'WonderSL',
+      title: 'Global Constructions',
       debugShowCheckedModeBanner: false,
       theme: lightTheme(context),
       home: const RequisitionsHome(),
