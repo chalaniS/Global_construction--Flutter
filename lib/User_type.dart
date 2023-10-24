@@ -1,4 +1,5 @@
 import 'package:construction/Admin/SiteManagement/dashboard.dart';
+import 'package:construction/Admin/SiteManagement/sites_page.dart';
 import 'package:construction/Supplier/pages/User/login_page.dart';
 import 'package:construction/Supplier/pages/home_page.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +53,7 @@ class _UserTypeSelectionState extends State<UserTypeSelection> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => DashBoard(),
+                    builder: (context) => SitesPage(),
                   ),
                 );
               },

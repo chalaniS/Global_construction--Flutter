@@ -1,3 +1,4 @@
+import 'package:construction/Admin/SiteManagement/components/side_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -34,13 +35,54 @@ class _SiteExpenditureDetailsState extends State<SiteExpenditureDetails> {
     Color headerBackgroundColor = Colors.blue;
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF00008B),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text(
+              'Global Constructions',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600),
+            ),
+            const Text('Requisitions'),
+            Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(7),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: const Row(
+                    children: [
+                      Icon(
+                        Icons.person_rounded,
+                        color: Colors.black,
+                      ),
+                      SizedBox(width: 5),
+                      Text(
+                        'User name',
+                        style: TextStyle(color: Colors.black, fontSize: 14),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            //const SideMenuBar(),
             Text(
-              'Expenditure Details',
+              'Expenditure Details Of',
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 30,
@@ -85,17 +127,17 @@ class _SiteExpenditureDetailsState extends State<SiteExpenditureDetails> {
             SizedBox(height: 50),
             Container(
               width: 150,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => SiteDetailpage(),
-                    ),
-                  );
-                },
-                child: Text('Back'),
-              ),
+              // child: ElevatedButton(
+              //   onPressed: () {
+              //     Navigator.pushReplacement(
+              //       context,
+              //       MaterialPageRoute(
+              //         builder: (context) => SiteDetailpage(),
+              //       ),
+              //     );
+              //   },
+              //   child: Text('Back'),
+              // ),
             )
           ],
         ),

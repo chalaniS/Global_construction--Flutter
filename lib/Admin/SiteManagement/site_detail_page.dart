@@ -1,250 +1,216 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-import 'site_expenditure_details.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class SiteDetailpage extends StatefulWidget {
-  const SiteDetailpage({Key? key}) : super(key: key);
+  final String projectID;
+  const SiteDetailpage({Key? key, required this.projectID}) : super(key: key);
 
   @override
   State<SiteDetailpage> createState() => _SiteDetailpageState();
 }
 
 class _SiteDetailpageState extends State<SiteDetailpage> {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final databaseReference = FirebaseDatabase.instance.reference();
 
-  Future<DocumentSnapshot<Map<String, dynamic>>> getProjectDetails() async {
-    final projectSnapshot =
-        await _firestore.collection('projects').doc('projectId').get();
+  String projectName = "";
+  String sitePlace = "";
+  String mainSupplier = "";
+  String architect = "";
+  String natureProject = "";
+  String projectFigures = "";
+  String startDate = "";
+  String endDate = "";
+  String estimatedBudget = "";
 
-    return projectSnapshot;
+  Future<void> fetchProjectDetails(String projectID) async {
+    final DataSnapshot dataSnapshot = (await databaseReference
+        .child('sites')
+        .child(widget.projectID)
+        .once()) as DataSnapshot;
+    final projectData = dataSnapshot.value as Map<dynamic, dynamic>;
+
+    setState(() {
+      projectName = projectData['projectName'] ?? '';
+      sitePlace = projectData['sitePlace'] ?? '';
+      mainSupplier = projectData['mainSupplier'] ?? '';
+      architect = projectData['architect'] ?? '';
+      natureProject = projectData['natureProject'] ?? '';
+      projectFigures = projectData['projectFigures'] ?? '';
+      startDate = projectData['startDate'] ?? '';
+      endDate = projectData['endDate'] ?? '';
+      estimatedBudget = projectData['estimatedBudget'] ?? '';
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Scaffold(
-      body: SafeArea(
-        child: FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-          future: getProjectDetails(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return CircularProgressIndicator();
-            }
-            if (snapshot.hasError) {
-              return Text('Error: ${snapshot.error}');
-            }
-
-            final projectData = snapshot.data!.data();
-            final projectName = projectData!['projectName'];
-            final location = projectData['location'];
-            final mainSupplier = projectData['mainSupplier'];
-            final architect = projectData['architect'];
-            final natureOfProject = projectData['natureOfProject'];
-            final projectFigures = projectData['projectFigures'];
-            final startDate = projectData['startDate'];
-            final endDate = projectData['endDate'];
-
-            return ListView(
-              padding: const EdgeInsets.all(10),
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF00008B),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text(
+              'Global Constructions',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            Row(
               children: [
-                SizedBox(
-                  height: size.height * 0.38,
-                  width: double.maxFinite,
-                  child: Stack(
-                    fit: StackFit.expand,
+                Container(
+                  padding: const EdgeInsets.all(7),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: const Row(
                     children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.vertical(
-                            bottom: Radius.circular(20),
-                          ),
-                          // image: DecorationImage(
-                          //   image: AssetImage(image),
-                          //   fit: BoxFit.cover,
-                          // ),
-                        ),
+                      Icon(
+                        Icons.person_rounded,
+                        color: Colors.black,
                       ),
-                      Positioned(
-                        top: 10,
-                        left: 0,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.7),
-                            borderRadius: const BorderRadius.horizontal(
-                              right: Radius.circular(15),
-                            ),
-                          ),
-                        ),
+                      SizedBox(width: 5),
+                      Text(
+                        'User name',
+                        style: TextStyle(color: Colors.black, fontSize: 14),
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(height: 20),
-                Row(
-                  children: [
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Project Name",
-                          style: Theme.of(context).textTheme.titleLarge,
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          projectName,
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                      ],
-                    ),
-                    const Spacer(),
-                  ],
-                ),
-                const SizedBox(height: 15),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          "Location - ",
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleLarge!
-                              .copyWith(
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          location,
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                        Text(
-                          "Main Supplier - ",
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleLarge!
-                              .copyWith(
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          mainSupplier,
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                        Text(
-                          "Architect - ",
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleLarge!
-                              .copyWith(
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          architect,
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                        Text(
-                          "Nature Of Project - ",
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleLarge!
-                              .copyWith(
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          natureOfProject,
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                        Text(
-                          "Project Figures - ",
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleLarge!
-                              .copyWith(
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          projectFigures,
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                        Text(
-                          "Start Date - ",
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleLarge!
-                              .copyWith(
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          startDate,
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                        Text(
-                          "End Date - ",
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleLarge!
-                              .copyWith(
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          endDate,
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                // Container(
-                //   height: 180,
-                //   width: double.maxFinite,
-                //   decoration: BoxDecoration(
-                //     borderRadius: BorderRadius.circular(15),
-                //     color: Theme.of(context)
-                //         .colorScheme
-                //         .secondary
-                //         .withOpacity(0.1),
-                //     image: const DecorationImage(
-                //       image: AssetImage('assets/map.png'),
-                //       fit: BoxFit.cover,
-                //     ),
-                //   ),
-                // ),
-                const SizedBox(height: 15),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SiteExpenditureDetails(),
-                      ),
-                    );
-                  },
-                  child: Text("View Expenditure Details"),
-                ),
-                SizedBox(height: 20),
               ],
-            );
-          },
+            ),
+          ],
         ),
+      ),
+      body: Column(
+        children: [
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(16),
+                child: Image.network(
+                  'URL_TO_YOUR_IMAGE', // Replace with your image URL
+                  width: 100, // Adjust the width and height as needed
+                  height: 400,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Project Name: ${projectName ?? 'N/A'}',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16)),
+                    SizedBox(height: 10),
+                    Text('Location: ${sitePlace ?? 'N/A'}',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16)),
+                    Text('Main Supplier: ${mainSupplier ?? 'N/A'}',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16)),
+                    Text('Architect: ${architect ?? 'N/A'}',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16)),
+                    Text('Nature Of Projects : ${natureProject ?? 'N/A'}',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16)),
+                    Text('Project Figures : ${projectFigures ?? 'N/A'}',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16)),
+                    Text('Start Date : ${startDate ?? 'N/A'}',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16)),
+                    Text('End Date : ${endDate ?? 'N/A'}',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16)),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          Card(
+            color: const Color.fromARGB(255, 37, 100, 194),
+            elevation: 2,
+            child: DataTable(
+              dataRowColor: MaterialStateProperty.all(
+                  Colors.white), // White background for data rows
+              headingRowHeight: 35, // Set the heading row height
+              dataRowMinHeight: 35,
+              dataRowMaxHeight: 35,
+              columns: const [
+                DataColumn(
+                  label: Text('INITIALLY ALLOCATED BUDGET',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold)),
+                ),
+                DataColumn(
+                  label: Text('TOTAL AMOUNT SPENT',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold)),
+                ),
+                DataColumn(
+                  label: Text('REMAINING BUDGET',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold)),
+                ),
+                DataColumn(
+                  label: Text('NEWLY ALLOCATED',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold)),
+                ),
+              ],
+              rows: const [
+                DataRow(cells: [
+                  DataCell(Text('')),
+                  DataCell(Text('')),
+                  DataCell(Text(
+                    'Total AMount',
+                    style: TextStyle(fontSize: 16),
+                  )),
+                  DataCell(Text(
+                    'Rs. 250000',
+                    style: TextStyle(fontSize: 16),
+                  )),
+                ]),
+              ],
+            ),
+          ),
+          SizedBox(height: 20),
+          Container(
+            width: 300, // Set the desired width here
+            child: ElevatedButton(
+              onPressed: () {
+                // Your button's onPressed function
+              },
+              child: Text(
+                'View Expenditure Details',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(
+                    Color.fromARGB(255, 235, 150, 4)),
+              ),
+            ),
+          ),
+          SizedBox(height: 20),
+        ],
       ),
     );
   }
