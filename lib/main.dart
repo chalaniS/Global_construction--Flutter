@@ -2,6 +2,8 @@ import 'package:construction/SiteManager/pages/cart_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+import 'SiteManager/pages/add_order.dart';
+import 'SiteManager/pages/orders_main_page.dart';
 import 'firebase_options.dart';
 
 import 'theme.dart';
@@ -31,7 +33,7 @@ class MyApp extends StatelessWidget {
       theme: lightTheme(context),
       // home: CartPage(),
       // home: OrderDetailPage(),
-      home: CartPage(),
+      home: const OrdersMainPage(),
     );
   }
 }

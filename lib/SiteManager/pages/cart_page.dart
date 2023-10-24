@@ -70,7 +70,7 @@ class _CartPageState extends State<CartPage> {
         actions: [
           IconButton(
             icon: const Icon(
-              Icons.menu,
+              Icons.add,
               color: Color(0xFF00008B),
             ),
             onPressed: () {
