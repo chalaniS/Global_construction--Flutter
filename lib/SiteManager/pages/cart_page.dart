@@ -1,7 +1,9 @@
 import 'package:construction/SiteManager/components/cart_add_remove_button.dart';
+import 'package:construction/SiteManager/pages/checkout_page.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../components/cart_item.dart';
+
+import 'add_order.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -11,6 +13,8 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
+  double subtotal = 0.0; // Initialize subtotal
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -115,7 +119,7 @@ class _CartPageState extends State<CartPage> {
                   ),
 
                   //subtotal section
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
@@ -137,17 +141,24 @@ class _CartPageState extends State<CartPage> {
                     ],
                   ),
 
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
 
                   // checkout button
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AddOrderPage(),
+                        ),
+                      );
+                    },
                     child: Container(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       width: double.infinity,
                       height: 40,
                       decoration: BoxDecoration(
-                        color: Color(0xFF00008B),
+                        color: const Color(0xFF00008B),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       alignment: Alignment.center,
@@ -201,20 +212,21 @@ class _CartPageState extends State<CartPage> {
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         data['supplierName'],
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Text(
                         data['productName'],
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
                         ),
@@ -223,20 +235,13 @@ class _CartPageState extends State<CartPage> {
                   ),
                 ],
               ),
-              SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CartAddRemoveButton(),
-                  Text(
-                    "Rs. ${data['price']}", // Use productData
-                    style: TextStyle(fontSize: 14),
-                  )
-                ],
+              Text(
+                "Rs. ${data['price']}", // Use productData
+                style: const TextStyle(fontSize: 14),
               ),
             ],
           ),
-          Column(
+          const Column(
             children: [
               SizedBox(height: 10),
               Divider(

@@ -80,14 +80,14 @@ class _AllOrdersPageState extends State<AllOrdersPage> {
               ),
             ),
 
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
             // container for drop down menu for order by
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text("Order by: "),
-                SizedBox(width: 10),
+                const Text("Order by: "),
+                const SizedBox(width: 10),
                 Container(
                   width: 75,
                   height: 40,
@@ -127,18 +127,18 @@ class _AllOrdersPageState extends State<AllOrdersPage> {
               ],
             ),
 
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
             // all orders
             Expanded(
               child: Container(
-                padding: EdgeInsets.all(0),
-                width: 300,
+                padding: const EdgeInsets.all(0),
+                width: 360,
                 child: ListView.builder(
                   itemCount: 6,
                   itemBuilder: (context, index) {
-                    return SizedBox(
-                      height: 140,
+                    return const SizedBox(
+                      height: 160,
                       width: 250,
                       child: OrderItemCard(),
                     );

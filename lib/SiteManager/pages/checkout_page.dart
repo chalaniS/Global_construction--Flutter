@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'all_orders_page.dart';
+
 class CheckoutPage extends StatefulWidget {
   const CheckoutPage({super.key});
 
@@ -56,9 +58,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
             // Address section
             Container(
               padding: const EdgeInsets.all(10),
-              child: Row(
+              child: const Row(
                 children: [
-                  const Icon(Icons.location_on),
+                  Icon(Icons.location_on),
                   SizedBox(width: 20),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,26 +76,26 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       ),
                     ],
                   ),
-                  Spacer(),
-                  const Icon(Icons.arrow_forward_ios),
+                  // Spacer(),
+                  // Icon(Icons.arrow_forward_ios),
                 ],
               ),
             ),
 
-            SizedBox(height: 10),
-            Divider(
+            const SizedBox(height: 10),
+            const Divider(
               color: Colors.black26,
               height: 1,
               thickness: 1,
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
             // contact section
             Container(
               padding: const EdgeInsets.all(10),
-              child: Row(
+              child: const Row(
                 children: [
-                  const Icon(Icons.phone),
+                  Icon(Icons.phone),
                   SizedBox(width: 20),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -109,19 +111,19 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       ),
                     ],
                   ),
-                  Spacer(),
-                  const Icon(Icons.arrow_forward_ios),
+                  // Spacer(),
+                  // Icon(Icons.arrow_forward_ios),
                 ],
               ),
             ),
 
-            SizedBox(height: 10),
-            Divider(
+            const SizedBox(height: 10),
+            const Divider(
               color: Colors.black26,
               height: 1,
               thickness: 1,
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
 
             // delivery option
             Column(
@@ -130,8 +132,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      width: 400,
-                      padding: EdgeInsets.all(10),
+                      width: 350,
+                      padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
@@ -170,7 +172,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
               ],
             ),
 
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
             // sechedule option
             Column(
@@ -179,8 +181,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      width: 400,
-                      padding: EdgeInsets.all(10),
+                      width: 350,
+                      padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
@@ -219,7 +221,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
               ],
             ),
 
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
 
             // order summary
             const Text(
@@ -230,12 +232,12 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Container(
-              padding: EdgeInsets.only(left: 10, right: 10, top: 5),
+              padding: const EdgeInsets.only(left: 10, right: 10, top: 5),
               child: Row(
                 children: [
-                  Column(
+                  const Column(
                     children: [
                       ClipOval(
                         child: Image(
@@ -246,8 +248,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       ),
                     ],
                   ),
-                  SizedBox(width: 20),
-                  Column(
+                  const SizedBox(width: 20),
+                  const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
@@ -266,33 +268,40 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       ),
                     ],
                   ),
-                  Spacer(),
+                  const Spacer(),
                   IconButton(
                     onPressed: () {},
-                    icon: Icon(Icons.keyboard_arrow_down),
+                    icon: const Icon(Icons.keyboard_arrow_down),
                   ),
                 ],
               ),
             ),
 
-            SizedBox(height: 10),
-            Divider(
+            const SizedBox(height: 10),
+            const Divider(
               color: Colors.black26,
               height: 1,
               thickness: 1,
             ),
 
-            Spacer(),
+            const Spacer(),
 
             // place order button
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AllOrdersPage(),
+                  ),
+                );
+              },
               child: Container(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 width: double.infinity,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: Color(0xFF00008B),
+                  color: const Color(0xFF00008B),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 alignment: Alignment.center,

@@ -11,9 +11,9 @@ class _CartAddRemoveButtonState extends State<CartAddRemoveButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 80,
-      // height: 20,
-      padding: EdgeInsets.all(5),
+      width: 120,
+      height: 40,
+      padding: EdgeInsets.all(2),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),

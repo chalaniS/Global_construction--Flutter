@@ -22,24 +22,24 @@ class _OrderItemCardState extends State<OrderItemCard> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         "#220023-01",
                         style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      SizedBox(height: 10),
-                      Text(
+                      const SizedBox(height: 10),
+                      const Text(
                         "Alpha Suppliers",
                         style: TextStyle(
                           color: Color(0xFF00008B),
                           fontWeight: FontWeight.w800,
                         ),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Container(
-                        child: Column(
+                        child: const Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
@@ -65,7 +65,7 @@ class _OrderItemCardState extends State<OrderItemCard> {
                   )
                 ],
               ),
-              SizedBox(width: 40),
+              const SizedBox(width: 80),
               Row(
                 children: [
                   Column(
@@ -75,11 +75,11 @@ class _OrderItemCardState extends State<OrderItemCard> {
                       GestureDetector(
                         onTap: () {},
                         child: Container(
-                          padding: EdgeInsets.all(4),
+                          padding: const EdgeInsets.all(4),
                           width: 70,
                           height: 30,
                           decoration: BoxDecoration(
-                            color: Color(0xFF00008B),
+                            color: const Color(0xFF00008B),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           alignment: Alignment.center,
@@ -93,11 +93,11 @@ class _OrderItemCardState extends State<OrderItemCard> {
                       GestureDetector(
                         onTap: () {},
                         child: Container(
-                          padding: EdgeInsets.all(4),
+                          padding: const EdgeInsets.all(4),
                           width: 70,
                           height: 30,
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 228, 154, 45),
+                            color: const Color.fromARGB(255, 228, 154, 45),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           alignment: Alignment.center,
@@ -111,11 +111,11 @@ class _OrderItemCardState extends State<OrderItemCard> {
                       GestureDetector(
                         onTap: () {},
                         child: Container(
-                          padding: EdgeInsets.all(4),
+                          padding: const EdgeInsets.all(4),
                           width: 70,
                           height: 30,
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 226, 5, 5),
+                            color: const Color.fromARGB(255, 226, 5, 5),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           alignment: Alignment.center,
