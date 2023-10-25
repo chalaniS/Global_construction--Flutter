@@ -1,3 +1,4 @@
+import 'package:construction/SiteManager/pages/all_orders_page.dart';
 import 'package:flutter/material.dart';
 
 import '../components/order_item.dart';
@@ -91,7 +92,7 @@ class _OrdersMainPageState extends State<OrdersMainPage> {
                   scrollDirection: Axis.horizontal,
                   itemCount: 4, // Set the number of items here
                   itemBuilder: (context, index) {
-                    return const OrderItemCard();
+                    return const AllOrdersPage();
                   },
                 ),
               ),
@@ -134,7 +135,7 @@ class _OrdersMainPageState extends State<OrdersMainPage> {
                   scrollDirection: Axis.horizontal,
                   itemCount: 4, // Set the number of items here
                   itemBuilder: (context, index) {
-                    return const OrderItemCard();
+                    return const AllOrdersPage();
                   },
                 ),
               ),
@@ -177,7 +178,7 @@ class _OrdersMainPageState extends State<OrdersMainPage> {
                   scrollDirection: Axis.horizontal,
                   itemCount: 4, // Set the number of items here
                   itemBuilder: (context, index) {
-                    return const OrderItemCard();
+                    return const AllOrdersPage();
                   },
                 ),
               ),
@@ -220,7 +221,7 @@ class _OrdersMainPageState extends State<OrdersMainPage> {
                   scrollDirection: Axis.horizontal,
                   itemCount: 4, // Set the number of items here
                   itemBuilder: (context, index) {
-                    return const OrderItemCard();
+                    return const AllOrdersPage();
                   },
                 ),
               ),

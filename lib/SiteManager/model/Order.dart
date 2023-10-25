@@ -1,13 +1,13 @@
 class Order {
-  final String orderID;
-  final String location;
-  final String contactNumber;
-  final DateTime requiredDate;
-  final String product;
-  final int quantity;
-  final int timestamp;
-  final double amount;
-  final String status;
+  String orderID;
+  String location;
+  String contactNumber;
+  DateTime requiredDate;
+  String product;
+  int quantity;
+  int timestamp;
+  double amount;
+  String status;
 
   Order({
     this.orderID = '',
@@ -22,7 +22,7 @@ class Order {
   });
 
   // Create a factory method to convert a map to an Order object
-  factory Order.fromMap(Map<dynamic, dynamic> map) {
+  factory Order.fromMap(Map<String, dynamic> map) {
     return Order(
       orderID: map['orderID'] ?? '',
       location: map['location'] ?? '',
@@ -34,7 +34,7 @@ class Order {
       quantity: map['quantity'] ?? 0,
       timestamp: map['timestamp'] ?? 0,
       amount: map['amount'] ?? 0.0,
-      status: map['status'] ?? '',
+      status: map['status'] ?? 'pending',
     );
   }
 
@@ -51,5 +51,27 @@ class Order {
       'amount': amount,
       'status': status,
     };
+  }
+
+  // Convert an Order object to a JSON object
+  Map<String, dynamic> toJson() {
+    return toMap();
+  }
+
+  // Create an Order object from JSON data and an orderId
+  static Order fromJson(Map<dynamic, dynamic> orderData, String orderId) {
+    return Order(
+      orderID: orderId,
+      location: orderData['location'] ?? '',
+      contactNumber: orderData['contactNumber'] ?? '',
+      requiredDate: orderData['requiredDate'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(orderData['requiredDate'])
+          : DateTime.now(),
+      product: orderData['product'] ?? '',
+      quantity: orderData['quantity'] ?? 0,
+      timestamp: orderData['timestamp'] ?? 0,
+      amount: orderData['amount'] ?? 0.0,
+      status: orderData['status'] ?? 'pending',
+    );
   }
 }

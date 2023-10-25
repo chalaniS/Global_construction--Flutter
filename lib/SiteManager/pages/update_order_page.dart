@@ -1,13 +1,75 @@
+import 'package:construction/SiteManager/pages/all_orders_page.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
+import '../model/Order.dart';
+
 class UpdateOrderPage extends StatefulWidget {
-  const UpdateOrderPage({super.key});
+  final String orderId;
+  const UpdateOrderPage({super.key, required this.orderId});
 
   @override
   State<UpdateOrderPage> createState() => _UpdateOrderPageState();
 }
 
 class _UpdateOrderPageState extends State<UpdateOrderPage> {
+  final DatabaseReference orderReference =
+      FirebaseDatabase.instance.reference().child('orders');
+
+  late Order order;
+  TextEditingController locationController = TextEditingController();
+  // TextEditingController requiredDateController = TextEditingController();
+  TextEditingController contactNumberController = TextEditingController();
+  TextEditingController productController = TextEditingController();
+  TextEditingController quantityController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _loadOrderData();
+  }
+
+  Future<void> _loadOrderData() async {
+    orderReference.child(widget.orderId).onValue.listen((event) {
+      final DataSnapshot orderSnapshot = event.snapshot;
+
+      if (orderSnapshot.value != null) {
+        final Map<dynamic, dynamic>? orderData =
+            orderSnapshot.value as Map<dynamic, dynamic>?;
+        print(orderData);
+
+        if (orderData != null) {
+          setState(() {
+            order = Order.fromJson(orderData, widget.orderId);
+            locationController.text = order.location;
+            // requiredDateController.text = order.requiredDate.toString();
+            contactNumberController.text = order.contactNumber;
+            productController.text = order.product;
+            quantityController.text = order.quantity.toString();
+          });
+        }
+      }
+    });
+  }
+
+  Future<void> _updateSupplierData() async {
+    order.location = locationController.text;
+    order.contactNumber = contactNumberController.text;
+    order.product = productController.text;
+    // order.requiredDate = DateTime.parse(requiredDateController.text);
+    order.quantity = int.parse(quantityController.text);
+
+    await orderReference.child(widget.orderId).update(order.toJson());
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return AllOrdersPage();
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,7 +149,7 @@ class _UpdateOrderPageState extends State<UpdateOrderPage> {
                     ),
                     SizedBox(height: 10),
                     Text(
-                      "Placed Date: 25-08-2021",
+                      "Placed Date",
                       style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.w500,
@@ -96,7 +158,7 @@ class _UpdateOrderPageState extends State<UpdateOrderPage> {
                     ),
                     SizedBox(height: 10),
                     Text(
-                      "Net Amount: Rs. 20000.00",
+                      "Net Amount",
                       style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.w500,
@@ -110,196 +172,23 @@ class _UpdateOrderPageState extends State<UpdateOrderPage> {
 
             SizedBox(height: 20),
 
-            const Text("Ordered Product List", style: TextStyle(fontSize: 14)),
-
-            SizedBox(height: 5),
-
-            // table
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Card(
-                  color: const Color(0xFF00008B),
-                  elevation: 2,
-                  child: DataTable(
-                    dataRowColor: MaterialStateProperty.all(Colors.white),
-                    headingRowHeight: 25,
-                    dataRowMinHeight: 25,
-                    dataRowMaxHeight: 25,
-                    columns: const [
-                      DataColumn(
-                        label: Text('#',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold)),
-                      ),
-                      DataColumn(
-                        label: Text('Name',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold)),
-                      ),
-                      DataColumn(
-                        label: Text('Qty',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold)),
-                      ),
-                      DataColumn(
-                        label: Text('Net Value',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold)),
-                      ),
-                      DataColumn(
-                        label: Text('Options',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold)),
-                      ),
-                    ],
-                    rows: const [
-                      DataRow(cells: [
-                        DataCell(Text(
-                          '01',
-                          style: TextStyle(fontSize: 12),
-                        )),
-                        DataCell(Text(
-                          'Bricks',
-                          style: TextStyle(fontSize: 12),
-                        )),
-                        DataCell(Text(
-                          '100',
-                          style: TextStyle(fontSize: 12),
-                        )),
-                        DataCell(Text(
-                          '20000.00',
-                          style: TextStyle(fontSize: 12),
-                        )),
-                        DataCell(
-                          Icon(
-                            Icons.delete_outline_outlined,
-                            color: Colors.red,
-                            size: 20,
-                          ),
-                        ),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text(
-                          '01',
-                          style: TextStyle(fontSize: 12),
-                        )),
-                        DataCell(Text(
-                          'Bricks',
-                          style: TextStyle(fontSize: 12),
-                        )),
-                        DataCell(Text(
-                          '100',
-                          style: TextStyle(fontSize: 12),
-                        )),
-                        DataCell(Text(
-                          '20000.00',
-                          style: TextStyle(fontSize: 12),
-                        )),
-                        DataCell(
-                          Icon(
-                            Icons.delete_outline_outlined,
-                            color: Colors.red,
-                            size: 20,
-                          ),
-                        ),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text(
-                          '01',
-                          style: TextStyle(fontSize: 12),
-                        )),
-                        DataCell(Text(
-                          'Bricks',
-                          style: TextStyle(fontSize: 12),
-                        )),
-                        DataCell(Text(
-                          '100',
-                          style: TextStyle(fontSize: 12),
-                        )),
-                        DataCell(Text(
-                          '20000.00',
-                          style: TextStyle(fontSize: 12),
-                        )),
-                        DataCell(
-                          Icon(
-                            Icons.delete_outline_outlined,
-                            color: Colors.red,
-                            size: 20,
-                          ),
-                        ),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text(
-                          '01',
-                          style: TextStyle(fontSize: 12),
-                        )),
-                        DataCell(Text(
-                          'Bricks',
-                          style: TextStyle(fontSize: 12),
-                        )),
-                        DataCell(Text(
-                          '100',
-                          style: TextStyle(fontSize: 12),
-                        )),
-                        DataCell(Text(
-                          '20000.00',
-                          style: TextStyle(fontSize: 12),
-                        )),
-                        DataCell(
-                          Icon(
-                            Icons.delete_outline_outlined,
-                            color: Colors.red,
-                            size: 20,
-                          ),
-                        ),
-                      ]),
-                    ],
-                  ),
-                ),
-              ],
+            const Text(
+              " Update Ordered Details",
+              style: TextStyle(
+                fontSize: 22,
+                color: Colors.black,
+              ),
             ),
 
-            SizedBox(height: 20),
-
-            Spacer(),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.add_circle_outline_outlined),
-                SizedBox(width: 5),
-                Text("Add More"),
-              ],
-            ),
-
-            SizedBox(height: 5),
-            Divider(
-              color: Colors.black,
-              height: 1,
-              thickness: 1,
-            ),
-            SizedBox(height: 10),
-
-            // text fields for required date and location
+            SizedBox(height: 15),
             Column(
               children: [
                 Row(
                   children: [
                     Text("Required Date: "),
-                    SizedBox(width: 7),
+                    SizedBox(height: 7),
                     Container(
-                      width: 300,
+                      width: 250,
                       height: 30,
                       padding: const EdgeInsets.all(6),
                       decoration: BoxDecoration(
@@ -312,7 +201,10 @@ class _UpdateOrderPageState extends State<UpdateOrderPage> {
                           width: 1,
                         ),
                       ),
-                      child: Text("25-08-2023", style: TextStyle(fontSize: 13)),
+                      child: TextField(
+                        // controller: requiredDateController,
+                        style: TextStyle(fontSize: 13),
+                      ),
                     ),
                   ],
                 ),
@@ -322,7 +214,7 @@ class _UpdateOrderPageState extends State<UpdateOrderPage> {
                     Text("Location: "),
                     SizedBox(width: 32),
                     Container(
-                      width: 300,
+                      width: 250,
                       height: 60,
                       padding: const EdgeInsets.all(6),
                       decoration: BoxDecoration(
@@ -335,21 +227,108 @@ class _UpdateOrderPageState extends State<UpdateOrderPage> {
                           width: 1,
                         ),
                       ),
-                      child: Text("25-08-2023", style: TextStyle(fontSize: 13)),
+                      child: TextField(
+                        controller: locationController,
+                        style: TextStyle(fontSize: 13),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10),
+                Row(
+                  children: [
+                    Text("Contact Number: "),
+                    SizedBox(width: 7),
+                    Container(
+                      width: 250,
+                      height: 30,
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                        border: Border.all(
+                          color: Colors.black,
+                          width: 1,
+                        ),
+                      ),
+                      child: TextField(
+                        controller: contactNumberController,
+                        style: TextStyle(fontSize: 13),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10),
+                Row(
+                  children: [
+                    Text("Product: "),
+                    SizedBox(width: 7),
+                    Container(
+                      width: 250,
+                      height: 30,
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                        border: Border.all(
+                          color: Colors.black,
+                          width: 1,
+                        ),
+                      ),
+                      child: TextField(
+                        controller: productController,
+                        style: TextStyle(fontSize: 13),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10),
+                Row(
+                  children: [
+                    Text("Quantity: "),
+                    SizedBox(width: 7),
+                    Container(
+                      width: 250,
+                      height: 30,
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                        border: Border.all(
+                          color: Colors.black,
+                          width: 1,
+                        ),
+                      ),
+                      child: TextField(
+                        controller: quantityController,
+                        style: TextStyle(fontSize: 13),
+                      ),
                     ),
                   ],
                 ),
               ],
             ),
 
+            // table
+
             SizedBox(height: 20),
+
+            Spacer(),
 
             // submit button
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                _updateSupplierData();
+              },
               child: Container(
                 padding: EdgeInsets.all(10),
-                width: double.infinity,
+                // width: double.infinity,
                 height: 40,
                 decoration: BoxDecoration(
                   color: Color(0xFF00008B),

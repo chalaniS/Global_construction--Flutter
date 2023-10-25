@@ -2,6 +2,8 @@ import 'package:construction/SiteManager/pages/cart_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+import 'SiteManager/pages/all_orders_page.dart';
+import 'Supplier/supplier_list.dart';
 import 'firebase_options.dart';
 
 import 'theme.dart';
@@ -29,8 +31,8 @@ class MyApp extends StatelessWidget {
       title: 'Global Construction',
       debugShowCheckedModeBanner: false,
       theme: lightTheme(context),
-      home: const CartPage(),
-      // home: const CheckoutPage(),
+      // home: const CartPage(),
+      home: SupplierListPage(),
       // home: const OrderDetailPage(),
       // home: const OrdersMainPage(),
     );

@@ -1,6 +1,9 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 import '../components/order_item.dart';
+import '../model/Order.dart';
+import 'add_order.dart';
 
 class AllOrdersPage extends StatefulWidget {
   const AllOrdersPage({Key? key}) : super(key: key);
@@ -10,6 +13,37 @@ class AllOrdersPage extends StatefulWidget {
 }
 
 class _AllOrdersPageState extends State<AllOrdersPage> {
+  final DatabaseReference orderReference =
+      FirebaseDatabase.instance.reference().child('orders');
+  List<Map<dynamic, dynamic>> ordersData = [];
+  final List<Map<dynamic, dynamic>> orders = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadOrders();
+  }
+
+  Future<void> _loadOrders() async {
+    orderReference.onValue.listen((DatabaseEvent event) {
+      if (event.snapshot.value != null) {
+        final data = event.snapshot.value;
+        if (data is Map) {
+          data.forEach((key, value) {
+            final order = Map<dynamic, dynamic>.from(value);
+            order['key'] = key;
+            orders.add(order);
+            // print(order);
+          });
+
+          setState(() {
+            ordersData = orders;
+          });
+        }
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,6 +114,23 @@ class _AllOrdersPageState extends State<AllOrdersPage> {
               ),
             ),
 
+            ElevatedButton(
+              onPressed: () {
+                // Navigate to the AddOrderPage
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AddOrderPage()),
+                );
+              },
+              child: const Text(
+                'Add Order',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 0, 112, 224),
+                  fontSize: 21,
+                ),
+              ),
+            ),
+
             const SizedBox(height: 10),
 
             // container for drop down menu for order by
@@ -130,22 +181,25 @@ class _AllOrdersPageState extends State<AllOrdersPage> {
             const SizedBox(height: 10),
 
             // all orders
+
             Expanded(
               child: Container(
                 padding: const EdgeInsets.all(0),
                 width: 360,
                 child: ListView.builder(
-                  itemCount: 6,
+                  itemCount: ordersData.length,
                   itemBuilder: (context, index) {
-                    return const SizedBox(
-                      height: 160,
+                    final Map<dynamic, dynamic> ordercart = ordersData[index];
+                    print('order cart ${ordercart}');
+                    return SizedBox(
+                      height: 180,
                       width: 250,
-                      child: OrderItemCard(),
+                      child: OrderItemCard(order: ordercart),
                     );
                   },
                 ),
               ),
-            ),
+            )
           ],
         ),
       ),
