@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "170676369947",
-    "project_id": "constructions-4daac",
-    "storage_bucket": "constructions-4daac.appspot.com"
+    "project_number": "990459112588",
+    "project_id": "globalconstructions-a1add",
+    "storage_bucket": "globalconstructions-a1add.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:170676369947:android:91db1714a55ed3f99096be",
+        "mobilesdk_app_id": "1:990459112588:android:8fbf0a2cd1d2b04d06dfa9",
         "android_client_info": {
           "package_name": "com.example.construction"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyD-JosHDqiu0019UdTvwtQtX9lIFlXOeDY"
+          "current_key": "AIzaSyAer4S6Q_IHr9nlnTtUd3yovrRPVpZ2WYk"
         }
       ],
       "services": {

@@ -22,7 +22,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
           },
         ),
         title: const Text(
-          "Cart",
+          "Checkout",
           style: TextStyle(
             color: Color(0xFF00008B),
             fontSize: 20,

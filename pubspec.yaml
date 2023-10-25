@@ -38,7 +38,7 @@ dependencies:
   firebase_auth: ^4.10.1
   ionicons: ^0.2.2
   firebase_database: ^10.2.7
-  cloud_firestore: ^4.10.0
+  cloud_firestore: ^4.12.0
   cached_network_image: ^3.3.0
   flutter_admin_scaffold: ^1.2.0
   sqflite: ^2.3.0

@@ -22,22 +22,28 @@ class _CartAddRemoveButtonState extends State<CartAddRemoveButton> {
           width: 1,
         ),
       ),
-      child: const Row(
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Icon(
-            Icons.remove,
-            size: 15,
+          IconButton(
+            icon: const Icon(
+              Icons.remove,
+              size: 15,
+            ),
+            onPressed: () {},
           ),
-          Text(
-            "2",
+          const Text(
+            "1",
             style: TextStyle(fontSize: 12),
           ),
-          Icon(
-            Icons.add,
-            size: 15,
-          ),
+          IconButton(
+            icon: const Icon(
+              Icons.add,
+              size: 15,
+            ),
+            onPressed: () {},
+          )
         ],
       ),
     );

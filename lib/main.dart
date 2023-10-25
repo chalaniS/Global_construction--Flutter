@@ -1,4 +1,6 @@
 import 'package:construction/SiteManager/pages/cart_page.dart';
+import 'package:construction/SiteManager/pages/checkout_page.dart';
+import 'package:construction/SiteManager/pages/order_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -28,12 +30,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'WonderSL',
+      title: 'Global Construction',
       debugShowCheckedModeBanner: false,
       theme: lightTheme(context),
-      // home: CartPage(),
-      // home: OrderDetailPage(),
-      home: const OrdersMainPage(),
+      home: const CartPage(),
+      // home: const CheckoutPage(),
+      // home: const OrderDetailPage(),
+      // home: const OrdersMainPage(),
     );
   }
 }

@@ -44,37 +44,37 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCDLRCAY6pAhP8aFgytOMHDWYhu-FndcjQ',
-    appId: '1:170676369947:web:c370bee299b8df039096be',
-    messagingSenderId: '170676369947',
-    projectId: 'constructions-4daac',
-    authDomain: 'constructions-4daac.firebaseapp.com',
-    storageBucket: 'constructions-4daac.appspot.com',
+    apiKey: 'AIzaSyDqE74rC9JW-Z5bO--py0GcJK-G-eiRRF0',
+    appId: '1:990459112588:web:7624d030aa8479d106dfa9',
+    messagingSenderId: '990459112588',
+    projectId: 'globalconstructions-a1add',
+    authDomain: 'globalconstructions-a1add.firebaseapp.com',
+    storageBucket: 'globalconstructions-a1add.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyD-JosHDqiu0019UdTvwtQtX9lIFlXOeDY',
-    appId: '1:170676369947:android:91db1714a55ed3f99096be',
-    messagingSenderId: '170676369947',
-    projectId: 'constructions-4daac',
-    storageBucket: 'constructions-4daac.appspot.com',
+    apiKey: 'AIzaSyAer4S6Q_IHr9nlnTtUd3yovrRPVpZ2WYk',
+    appId: '1:990459112588:android:8fbf0a2cd1d2b04d06dfa9',
+    messagingSenderId: '990459112588',
+    projectId: 'globalconstructions-a1add',
+    storageBucket: 'globalconstructions-a1add.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAhYIV13D6E-TT3ueqPjZsoABJqPl_1FeA',
-    appId: '1:170676369947:ios:1b3098978c56d28a9096be',
-    messagingSenderId: '170676369947',
-    projectId: 'constructions-4daac',
-    storageBucket: 'constructions-4daac.appspot.com',
+    apiKey: 'AIzaSyB7E8FYNC5fX2mW-P_iPBr1eDbBhVyN2qU',
+    appId: '1:990459112588:ios:451a4c9cbeefcab806dfa9',
+    messagingSenderId: '990459112588',
+    projectId: 'globalconstructions-a1add',
+    storageBucket: 'globalconstructions-a1add.appspot.com',
     iosBundleId: 'com.example.construction',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyAhYIV13D6E-TT3ueqPjZsoABJqPl_1FeA',
-    appId: '1:170676369947:ios:b9cbfe8860fd98119096be',
-    messagingSenderId: '170676369947',
-    projectId: 'constructions-4daac',
-    storageBucket: 'constructions-4daac.appspot.com',
+    apiKey: 'AIzaSyB7E8FYNC5fX2mW-P_iPBr1eDbBhVyN2qU',
+    appId: '1:990459112588:ios:5f3162f65b15ac6b06dfa9',
+    messagingSenderId: '990459112588',
+    projectId: 'globalconstructions-a1add',
+    storageBucket: 'globalconstructions-a1add.appspot.com',
     iosBundleId: 'com.example.construction.RunnerTests',
   );
 }
