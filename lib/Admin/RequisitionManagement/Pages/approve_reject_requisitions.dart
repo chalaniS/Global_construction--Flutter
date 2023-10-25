@@ -420,7 +420,7 @@ class _RequisitionsApprovalPageState extends State<RequisitionsApprovalPage> {
                             style: TextStyle(fontSize: 16),
                           )),
                           DataCell(Text(
-                            'Lorem ipsum dolor',
+                            'rock sand',
                             style: TextStyle(fontSize: 16),
                           )),
                           DataCell(Text(
@@ -438,7 +438,7 @@ class _RequisitionsApprovalPageState extends State<RequisitionsApprovalPage> {
                             style: TextStyle(fontSize: 16),
                           )),
                           DataCell(Text(
-                            'Lorem ipsum dolor',
+                            'rocell floor tiles',
                             style: TextStyle(fontSize: 16),
                           )),
                           DataCell(Text(
@@ -456,7 +456,7 @@ class _RequisitionsApprovalPageState extends State<RequisitionsApprovalPage> {
                             style: TextStyle(fontSize: 16),
                           )),
                           DataCell(Text(
-                            'Lorem ipsum dolor',
+                            'tokyo super cement',
                             style: TextStyle(fontSize: 16),
                           )),
                           DataCell(Text(

@@ -32,9 +32,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: lightTheme(context),
       home: const RequisitionsHome(),
-      // home: const PendingRequisitions(),
-      // home: const RequisitionsApprovalPage(),
-      // home: const RejectedRequisitions(),
     );
   }
 }
