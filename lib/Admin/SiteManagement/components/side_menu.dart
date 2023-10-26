@@ -1,4 +1,4 @@
-
+import 'package:construction/Admin/SiteManagement/dashboard.dart';
 import 'package:construction/Admin/SiteManagement/sites_page.dart';
 import 'package:flutter/material.dart';
 
@@ -59,20 +59,23 @@ class _SideMenuBarState extends State<SideMenuBar> {
             onTap: () {},
           ),
           SizedBox(height: 10),
-          ListTile(
-            leading: const Icon(Icons.home_work_outlined),
-            title: const Text(
-              'Sites',
-              style: TextStyle(fontSize: 18),
+          Container(
+            color: Color.fromARGB(255, 119, 172, 241),
+            child: ListTile(
+              leading: const Icon(Icons.home_work_outlined),
+              title: const Text(
+                'Sites',
+                style: TextStyle(fontSize: 18),
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SitesPage(),
+                  ),
+                );
+              },
             ),
-            onTap: () {onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const SitesPage(),
-                ),
-              );
-            };},
           ),
           const Spacer(),
           ListTile(

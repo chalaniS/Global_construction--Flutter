@@ -1,4 +1,5 @@
 class SiteData {
+  String projectId;
   String projectName;
   String sitePlace;
   String mainSupplier;
@@ -10,9 +11,12 @@ class SiteData {
   String startDate;
   String endDate;
   String imageUrl;
+  String newlyAllocated;
+  String status;
 
   SiteData(
-      {required this.projectName,
+      {required this.projectId,
+      required this.projectName,
       required this.sitePlace,
       required this.mainSupplier,
       required this.architect,
@@ -22,5 +26,7 @@ class SiteData {
       required this.remainingBudget,
       required this.startDate,
       required this.endDate,
-      required this.imageUrl});
+      required this.imageUrl,
+      required this.newlyAllocated,
+      required this.status});
 }

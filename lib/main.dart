@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
       title: 'WonderSL',
       debugShowCheckedModeBanner: false,
       theme: lightTheme(context),
-      home: SitesPage(),
+      home: DashBoard(),
       routes: {
         '/ongoing_sites': (context) => OngoingSites(),
         '/completed_sites': (context) => CompletedSites(),

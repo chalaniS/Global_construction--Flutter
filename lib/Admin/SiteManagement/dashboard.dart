@@ -1,8 +1,5 @@
-import 'package:construction/Admin/SiteManagement/add_new_sites.dart';
-import 'package:construction/Admin/SiteManagement/components/dashboard_tile.dart';
 import 'package:construction/Admin/SiteManagement/components/side_menu.dart';
 import 'package:flutter/material.dart';
-import 'package:table_calendar/table_calendar.dart';
 
 class DashBoard extends StatefulWidget {
   DashBoard({Key? key}) : super(key: key);
@@ -12,22 +9,8 @@ class DashBoard extends StatefulWidget {
 }
 
 class _DashBoardState extends State<DashBoard> {
-  final ScrollController _scrollController = ScrollController();
-  double _scrollPosition = 0;
-  double _opacity = 0;
-
-  _scrollListener() {
-    setState(() {
-      _scrollPosition = _scrollController.position.pixels;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
-    _opacity = _scrollPosition < screenSize.height * 0.40
-        ? _scrollPosition / (screenSize.height * 0.40)
-        : 1;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF00008B),
@@ -69,81 +52,134 @@ class _DashBoardState extends State<DashBoard> {
           ],
         ),
       ),
-      //drawer: SideBar(),
-      // body: Row(
-      //   children: [
-      //     const SideMenuBar(),
-      //     Container(
-      //       width: MediaQuery.of(context).size.width * 0.80,
-      //       color: const Color(value),
-      //       child: const Center(
-      //         child: Column(
-      //           mainAxisAlignment: MainAxisAlignment.center,
-      //           children: [
-      //             Expanded(
-      //               flex: 1,
-      //               child: Container(
-      //                 child: Image.asset(
-      //                   'assets/Home.jpg',
-      //                   height: screenSize.height * 0.75,
-      //                 ),
-      //               ),
-      //             ),
-      //             Expanded(
-      //               flex: 1,
-      //               child: Container(
-      //                 margin: EdgeInsets.all(16),
-      //                 width: screenSize.height * 0.25, // Add margin as needed
-      //                 decoration: BoxDecoration(
-      //                   color: Colors.white,
-      //                   borderRadius: BorderRadius.circular(16),
-      //                   boxShadow: [
-      //                     BoxShadow(
-      //                       color: Colors.grey.withOpacity(0.5),
-      //                       spreadRadius: 5,
-      //                       blurRadius: 7,
-      //                       offset: Offset(0, 3),
-      //                     ),
-      //                   ],
-      //                 ),
-      //                 child: TableCalendar(
-      //                   firstDay: DateTime.utc(2010, 10, 16),
-      //                   lastDay: DateTime.utc(2030, 3, 14),
-      //                   focusedDay: DateTime.now(),
-      //                 ),
-      //               ),
-      //             ),
-      //             // Calendar Column
-      //             // Calendar Column
+      body: Row(
+        children: [
+          // Side menu
+          const SideMenuBar(),
 
-      //             SizedBox(
-      //               height: 30,
-      //             ),
-      //             Center(
-      //               child: Row(
-      //                 children: [
-      //                   GestureDetector(
-      //                     onTap: () {
-      //                       Navigator.push(
-      //                         context,
-      //                         MaterialPageRoute(
-      //                           builder: (context) => AddNewSites(),
-      //                         ),
-      //                       );
-      //                     },
-      //                     child: DashboardTile(title: 'New Sites'),
-      //                   ),
-      //                   DashboardTile(title: 'New Suppliers'),
-      //                   DashboardTile(title: 'New Requisitions'),
-      //                 ],
-      //               ),
-      //             )
-      //           ],
-      //         ),
-      //       ),
-      //     ),
-      //   ],
-      // ),
+          // Content area
+          Container(
+            width: MediaQuery.of(context).size.width * 0.80,
+            decoration: const BoxDecoration(
+              color: Color.fromARGB(255, 220, 221, 223),
+            ),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Image(
+                    image: AssetImage('assets/ongoing_sites_image.png'),
+                    width: 800,
+                    height: 300,
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // new supplier
+                      Column(
+                        children: [
+                          GestureDetector(
+                            onTap: () {},
+                            child: Container(
+                              width: 160,
+                              height: 160,
+                              padding: const EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 104, 135, 165),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: const Icon(
+                                Icons.business_outlined,
+                                size: 100.0,
+                                color: Colors.black87,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          const Text(
+                            "New Supplier",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      SizedBox(width: 10),
+
+                      // new site
+                      Column(
+                        children: [
+                          GestureDetector(
+                            onTap: () {},
+                            child: Container(
+                              width: 160,
+                              height: 160,
+                              padding: const EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 104, 135, 165),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: const Icon(
+                                Icons.construction_outlined,
+                                size: 100.0,
+                                color: Colors.black87,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          const Text(
+                            "New Site",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      SizedBox(width: 10),
+
+                      // add text
+                      Column(
+                        children: [
+                          GestureDetector(
+                            onTap: () {},
+                            child: Container(
+                              width: 160,
+                              height: 160,
+                              padding: const EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 104, 135, 165),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: const Icon(
+                                Icons.cancel,
+                                size: 100.0,
+                                color: Colors.black87,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          const Text(
+                            "Text",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
