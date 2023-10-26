@@ -1,16 +1,10 @@
-# construction
+# Global Construction
 
-A new Flutter project.
+This is our CSSE Project in 3rd Year 1st Semester.
 
-## Getting Started
+## Procurement for Construction Industry
 
-This project is a starting point for a Flutter application.
+This is designed by another person from our batch. We need to design and deliver the travel application to that team and implement their construction site management plan.
+This project should be cross-platform. Because the app and the web must be together. We choosed the flutter framework.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![construction](https://github.com/chalaniS/Global_construction--Flutter/assets/99180967/3e139428-b049-4a34-b140-75b68d8feca9)
