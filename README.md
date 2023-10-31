@@ -1,5 +1,5 @@
 # Global Construction
-
+  
 This is our CSSE Project in 3rd Year 1st Semester.
 
 ## Procurement for Construction Industry
